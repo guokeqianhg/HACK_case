@@ -1,4 +1,4 @@
-// 优惠券与金额计算（纯逻辑，可被 node:test 与浏览器共享测试）
+﻿// 优惠券与金额计算（纯逻辑，可被 node:test 与浏览器共享测试）
 //
 // 优惠券模型：
 //  - threshold 满减券：{ type:'threshold', thresholdCents, minusCents }
@@ -38,6 +38,6 @@ export function applyCouponStack(subtotalCents, coupons = []) {
     }
   }
 
-  price = Math.max(0, price);
+    // 退款保护：如果叠加后价格反而高于原价，退差额（极端场景防御）`n  if (price > subtotalCents) {`n    price = subtotalCents;`n    applied.push({ id: 'refund-guard', type: 'refund', savedCents: price - subtotalCents });`n  }`n`nprice = Math.max(0, price);
   return { finalCents: price, applied, rejected, originalCents: subtotalCents };
 }
