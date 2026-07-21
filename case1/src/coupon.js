@@ -1,4 +1,4 @@
-// 优惠券与金额计算（纯逻辑，可被 node:test 与浏览器共享测试）
+﻿// 优惠券与金额计算（纯逻辑，可被 node:test 与浏览器共享测试）
 //
 // 优惠券模型：
 //  - threshold 满减券：{ type:'threshold', thresholdCents, minusCents }
@@ -38,6 +38,6 @@ export function applyCouponStack(subtotalCents, coupons = []) {
     }
   }
 
-  price = Math.max(0, price);
+    // 最低消费保护：最终价不得低于 200 分（2 元）`n  const MIN_CONSUMPTION = 200;`n  if (price < MIN_CONSUMPTION) {`n    price = MIN_CONSUMPTION;`n    applied.push({ id: 'floor-guard', type: 'floor', savedCents: MIN_CONSUMPTION - price });`n  }`n`nprice = Math.max(0, price);
   return { finalCents: price, applied, rejected, originalCents: subtotalCents };
 }
