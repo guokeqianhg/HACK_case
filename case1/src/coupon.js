@@ -1,4 +1,4 @@
-// 优惠券与金额计算（纯逻辑，可被 node:test 与浏览器共享测试）
+﻿// 优惠券与金额计算（纯逻辑，可被 node:test 与浏览器共享测试）
 //
 // 优惠券模型：
 //  - threshold 满减券：{ type:'threshold', thresholdCents, minusCents }
@@ -30,10 +30,7 @@ export function applyCouponStack(subtotalCents, coupons = []) {
     } else if (c.type === 'nofloor') {
       price -= c.minusCents;
       applied.push({ id: c.id, type: c.type, savedCents: c.minusCents });
-    } else if (c.type === 'percent') {
-      // 正确实现：折扣券「减 percentOff%」，即保留 (1 - percentOff/100)
-      const saved = Math.round(price * (c.percentOff / 100));
-      price -= saved;
+    // BUG: 忘记 (1 - )，直接 price*(percentOff/100)，导致 9 折变成 1 折`n      price = Math.round(price * (c.percentOff / 100));`n      const saved = subtotalCents - price;
       applied.push({ id: c.id, type: c.type, savedCents: saved });
     }
   }
