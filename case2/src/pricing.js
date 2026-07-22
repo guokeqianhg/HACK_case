@@ -1,4 +1,4 @@
-export const FREE_MINUTES = 5;
+export const FREE_MINUTES = 15;
 export const HOURLY_RATES = {
   small: 600,
   large: 1000,

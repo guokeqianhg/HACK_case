@@ -55,3 +55,15 @@ test('挂失票按一口价', () => {
   assert.equal(fee.finalCents, 12000);
   assert.deepEqual(fee.rulesApplied, ['挂失票按一口价收费']);
 });
+
+test('超过免费 1 分钟后，至少按 1 小时收费', () => {
+  const fee = calcParkingFee({
+    vehicleType: 'small',
+    entryAt: '2026-07-22T09:44:00+08:00',
+    exitAt: EXIT_AT,
+  });
+  assert.equal(fee.stayMinutes, 16);
+  assert.equal(fee.billableHours, 1);
+  assert.equal(fee.finalCents, 600);
+});
+
