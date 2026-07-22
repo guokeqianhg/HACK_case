@@ -41,7 +41,7 @@ export function buildPeakTickets({ count = 500, exitAt }) {
       ticketId: `P${String(index + 1).padStart(4, '0')}`,
       plateNo: `测试${String(index + 1).padStart(4, '0')}`,
       vehicleType: index % 5 === 0 ? 'large' : 'small',
-      isMember: index % 3 === 0,
+      isMember: index % 3 === 0 || index % 5 === 0,
       entryAt: new Date(exitMs - stayMinutes * 60000).toISOString(),
       exitAt,
     };
