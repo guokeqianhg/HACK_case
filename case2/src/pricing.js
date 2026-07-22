@@ -75,8 +75,13 @@ export function calcParkingFee({ vehicleType = 'small', entryAt, exitAt, isMembe
 export function estimateBatch(tickets = [], defaultExitAt) {
   const startedAt = Date.now();
   let totalCents = 0;
+  let memberCount = 0;
 
   for (const ticket of tickets) {
+    if (ticket.isMember) {
+      memberCount += 1;
+    }
+
     const fee = calcParkingFee({
       ...ticket,
       exitAt: ticket.exitAt || defaultExitAt,
@@ -87,8 +92,10 @@ export function estimateBatch(tickets = [], defaultExitAt) {
   return {
     ok: true,
     count: tickets.length,
+    memberCount,
     totalCents,
     avgCents: tickets.length === 0 ? 0 : Math.round(totalCents / tickets.length),
     durationMs: Date.now() - startedAt,
   };
 }
+
