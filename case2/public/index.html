@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>停车场计费与高峰放行 Demo</title>
+  <link rel="stylesheet" href="/public/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🚗 停车场计费 Demo</h1>
+    <p class="sub">简单易懂的性能案例 · AI 测试官被测对象</p>
+  </header>
+
+  <main>
+    <section class="card intro">
+      <h2>规则说明</h2>
+      <ul class="rule-list">
+        <li>前 <strong>15 分钟</strong> 免费</li>
+        <li>小型车按每开始 1 小时 <strong>¥6</strong></li>
+        <li>大型车按每开始 1 小时 <strong>¥10</strong></li>
+        <li>会员按正常费用打 <strong>9 折</strong></li>
+        <li>挂失票走一口价</li>
+      </ul>
+      <div id="config" class="config" data-testid="config"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>当前待出场车辆</h2>
+        <span class="hint">点击按钮直接结算</span>
+      </div>
+      <ul id="ticket-items" class="ticket-list" data-testid="ticket-list"></ul>
+      <div id="result" class="result neutral" data-testid="result">点击任意车辆的“出场结算”按钮查看结算结果。</div>
+    </section>
+
+    <section class="card perf-card">
+      <div class="section-head">
+        <h2>高峰放行估算</h2>
+        <span class="hint">用于性能演示</span>
+      </div>
+      <p class="desc">模拟出口高峰时一次性估算多辆车的收费，便于讲“批量计算正确性 + 接口耗时”。</p>
+      <div class="toolbar">
+        <label>
+          车辆数
+          <input id="batch-count" type="number" value="500" min="10" max="5000" data-testid="batch-count" />
+        </label>
+        <button id="estimate" data-testid="estimate-btn">开始估算</button>
+      </div>
+      <div id="batch-result" class="result neutral" data-testid="batch-result">尚未执行高峰估算。</div>
+    </section>
+  </main>
+
+  <script type="module" src="/public/app.js"></script>
+</body>
+</html>

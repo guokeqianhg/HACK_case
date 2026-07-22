@@ -1,0 +1,18 @@
+{
+  "name": "case2-parking-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "停车场计费与高峰放行系统 —— AI 测试官 case2",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test \"tests/*.test.js\"",
+    "smoke:api": "node smoke/api-smoke.mjs",
+    "smoke:perf": "node smoke/perf-smoke.mjs",
+    "smoke:ui": "playwright test smoke/ui-smoke.spec.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "playwright": "^1.61.1"
+  },
+  "license": "MIT"
+}
